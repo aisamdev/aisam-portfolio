@@ -78,7 +78,12 @@ body.loading {
 }
 
 /* Typography Hierarchy */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 0;
   font-weight: 700;
   line-height: 1.2;
@@ -171,7 +176,7 @@ a {
   margin: 0 auto var(--space-sm);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: 
+  box-shadow:
     var(--shadow-lg),
     0 0 40px rgba(0, 0, 0, 0.2),
     0 0 80px rgba(0, 0, 0, 0.1);
@@ -180,7 +185,7 @@ a {
 
 .avatar-wrapper:hover {
   transform: translateY(-2px);
-  box-shadow: 
+  box-shadow:
     0 12px 32px rgba(0, 0, 0, 0.15),
     0 0 50px rgba(0, 0, 0, 0.25),
     0 0 100px rgba(0, 0, 0, 0.15);
@@ -396,12 +401,29 @@ a {
   animation: fadeInUp 0.5s ease-out forwards;
 }
 
-.card:nth-child(1) { animation-delay: 0.3s; }
-.card:nth-child(2) { animation-delay: 0.35s; }
-.card:nth-child(3) { animation-delay: 0.4s; }
-.card:nth-child(4) { animation-delay: 0.45s; }
-.card:nth-child(5) { animation-delay: 0.5s; }
-.card:nth-child(6) { animation-delay: 0.55s; }
+.card:nth-child(1) {
+  animation-delay: 0.3s;
+}
+
+.card:nth-child(2) {
+  animation-delay: 0.35s;
+}
+
+.card:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.card:nth-child(4) {
+  animation-delay: 0.45s;
+}
+
+.card:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+.card:nth-child(6) {
+  animation-delay: 0.55s;
+}
 
 .card:hover {
   transform: translateY(-2px);
@@ -418,6 +440,7 @@ a {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -429,6 +452,7 @@ a {
     opacity: 0;
     transform: translateX(-20px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -440,6 +464,7 @@ a {
     opacity: 0;
     transform: scale(0.9);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
@@ -450,6 +475,7 @@ a {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -686,11 +712,25 @@ a {
   animation: fadeInUp 0.5s ease-out forwards;
 }
 
-.project:nth-child(1) { animation-delay: 0.6s; }
-.project:nth-child(2) { animation-delay: 0.65s; }
-.project:nth-child(3) { animation-delay: 0.7s; }
-.project:nth-child(4) { animation-delay: 0.75s; }
-.project:nth-child(5) { animation-delay: 0.8s; }
+.project:nth-child(1) {
+  animation-delay: 0.6s;
+}
+
+.project:nth-child(2) {
+  animation-delay: 0.65s;
+}
+
+.project:nth-child(3) {
+  animation-delay: 0.7s;
+}
+
+.project:nth-child(4) {
+  animation-delay: 0.75s;
+}
+
+.project:nth-child(5) {
+  animation-delay: 0.8s;
+}
 
 .project:hover {
   transform: translateY(-4px);
@@ -1059,7 +1099,9 @@ body.dark .theme-toggle .moon-icon {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .video-loading.hidden {
@@ -1188,6 +1230,30 @@ body.dark .theme-toggle .moon-icon {
   .timeline-item {
     padding-left: 24px;
     padding-bottom: 24px;
+  }
+
+  /* Mobile video reordering: all 7 videos first, then Experience */
+  .right-grid {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .right-main {
+    order: 1;
+  }
+
+  .right-side {
+    order: 2;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .right-side .experience-section {
+    order: 3;
+  }
+
+  .right-side .side-video-card {
+    order: 1;
   }
 }
 
@@ -1347,8 +1413,8 @@ body,
 .links a,
 .tool-item {
   transition: background-color var(--transition-slow),
-              color var(--transition-slow),
-              border-color var(--transition-slow);
+    color var(--transition-slow),
+    border-color var(--transition-slow);
 }
 
 /* ============================================
@@ -1369,28 +1435,25 @@ body,
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.1),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent);
   animation: skeleton-loading 1.5s infinite;
 }
 
 body.dark .skeleton::before {
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.05),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.05),
+      transparent);
 }
 
 @keyframes skeleton-loading {
   0% {
     left: -100%;
   }
+
   100% {
     left: 100%;
   }
@@ -1504,4 +1567,3 @@ body.dark .skeleton::before {
     position: static;
   }
 }
-

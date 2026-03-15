@@ -225,8 +225,16 @@ function openVideoPopup(ytId) {
 
   if (!popup || !popupIframe) return;
 
-  // Prevent body scroll
-  document.body.classList.add('no-scroll');
+  // Calculate scrollbar width before hiding it
+  const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+
+  // Prevent scroll while modal is open, compensate for scrollbar disappearing
+  document.body.style.overflow = 'hidden';
+  document.body.style.paddingRight = `${scrollbarWidth}px`;
+
+  // Also compensate fixed elements (theme toggle) so they don't shift
+  const themeToggle = document.getElementById('themeToggle');
+  if (themeToggle) themeToggle.style.paddingRight = `${scrollbarWidth}px`;
 
   // Show loading spinner
   if (videoLoading) videoLoading.classList.remove('hidden');
@@ -235,7 +243,7 @@ function openVideoPopup(ytId) {
   popupIframe.src = `https://www.youtube.com/embed/${ytId}?autoplay=1&mute=1`;
 
   // Hide spinner when iframe loads
-  popupIframe.onload = function() {
+  popupIframe.onload = function () {
     if (videoLoading) videoLoading.classList.add('hidden');
   };
 
@@ -258,8 +266,12 @@ function closeVideoPopup() {
     if (videoLoading) videoLoading.classList.remove('hidden');
   }, 300); // Match CSS transition duration
 
-  // Re-enable body scroll
-  document.body.classList.remove('no-scroll');
+  // Re-enable scroll and remove scrollbar compensation — page stays exactly where it is
+  document.body.style.overflow = '';
+  document.body.style.paddingRight = '';
+
+  const themeToggle = document.getElementById('themeToggle');
+  if (themeToggle) themeToggle.style.paddingRight = '';
 }
 
 // ============================================
@@ -275,10 +287,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // Email link hover effect
   const emailLink = document.querySelector('a[href^="mailto:"]');
   if (emailLink) {
-    emailLink.addEventListener('mouseenter', function() {
+    emailLink.addEventListener('mouseenter', function () {
       this.style.transform = 'translateY(-2px)';
     });
-    emailLink.addEventListener('mouseleave', function() {
+    emailLink.addEventListener('mouseleave', function () {
       this.style.transform = 'translateY(0)';
     });
   }
@@ -315,11 +327,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // Ensure all interactive elements are keyboard accessible
   const focusableElements = document.querySelectorAll('a, button, [tabindex]');
   focusableElements.forEach(el => {
-    el.addEventListener('focus', function() {
+    el.addEventListener('focus', function () {
       this.style.outline = '2px solid var(--accent)';
       this.style.outlineOffset = '2px';
     });
-    el.addEventListener('blur', function() {
+    el.addEventListener('blur', function () {
       this.style.outline = '';
       this.style.outlineOffset = '';
     });
