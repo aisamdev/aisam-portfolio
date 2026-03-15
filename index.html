@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -159,9 +159,9 @@
             </div>
 
             <div class="project-grid">
-              <div class="project" data-video="reel1.mp4">
-                <div class="video-wrapper project-card ratio-9-16">
-                  <img src="thumb1.jpg.jpg" class="thumb" alt="Talking-head reel hook" loading="lazy">
+              <div class="project">
+                <div class="video-wrapper project-card ratio-9-16" data-youtube-id="L0LmyaP_H_o">
+                  <img src="thumb1.jpg" class="thumb" alt="Test Edit V1 thumbnail" loading="lazy">
                   <div class="play-overlay">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="56" height="56" fill="white"
                       aria-hidden="true">
@@ -173,9 +173,9 @@
                 <p>Clean text-based edit with simple B-rolls. Focused on clarity, pacing, and readable captions.</p>
               </div>
 
-              <div class="project" data-video="reel2.mp4">
-                <div class="video-wrapper project-card ratio-9-16">
-                  <img src="thumb2.jpg.jpg" class="thumb" alt="Founder story reel" loading="lazy">
+              <div class="project">
+                <div class="video-wrapper project-card ratio-9-16" data-youtube-id="Gm6fS14sOtw">
+                  <img src="thumb2.jpg" class="thumb" alt="Test Edit V2 thumbnail" loading="lazy">
                   <div class="play-overlay">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="56" height="56" fill="white"
                       aria-hidden="true">
@@ -187,9 +187,9 @@
                 <p>Clean text with gradient styling and subtle motion graphics for a more polished visual flow.</p>
               </div>
 
-              <div class="project" data-video="reel3.mp4">
-                <div class="video-wrapper project-card ratio-16-9">
-                  <img src="thumb4.jpg.jpg" class="thumb" alt="Product tip reel" loading="lazy">
+              <div class="project">
+                <div class="video-wrapper project-card ratio-16-9" data-youtube-id="2dyiDOu4IV8">
+                  <img src="thumb4.jpg" class="thumb" alt="Test Edit V3 thumbnail" loading="lazy">
                   <div class="play-overlay">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="56" height="56" fill="white"
                       aria-hidden="true">
@@ -201,9 +201,9 @@
                 <p>Engaging text-focused edit designed for advertisement-style content with strong emphasis on hooks.</p>
               </div>
 
-              <div class="project" data-video="reel4.mp4">
-                <div class="video-wrapper project-card ratio-3-4">
-                  <img src="thumb6.jpg" class="thumb" alt="Client testimonial reel" loading="lazy">
+              <div class="project">
+                <div class="video-wrapper project-card ratio-3-4" data-youtube-id="i8CicNLo748">
+                  <img src="thumb6.jpg" class="thumb" alt="Test Edit V4 thumbnail" loading="lazy">
                   <div class="play-overlay">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="56" height="56" fill="white"
                       aria-hidden="true">
@@ -215,9 +215,9 @@
                 <p>Fast-paced storytelling reel using music, B-rolls, and dynamic text—optimized for TikTok-style content.</p>
               </div>
 
-              <div class="project" data-video="reel6.mp4">
-                <div class="video-wrapper project-card ratio-9-16">
-                  <img src="thumb3.jpg.jpg" class="thumb" alt="FAQ reel" loading="lazy">
+              <div class="project">
+                <div class="video-wrapper project-card ratio-9-16" data-youtube-id="6OP53q_b0oI">
+                  <img src="thumb3.jpg" class="thumb" alt="Test Edit V5 thumbnail" loading="lazy">
                   <div class="play-overlay">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="56" height="56" fill="white"
                       aria-hidden="true">
@@ -282,6 +282,39 @@
             </div>
           </div>
 
+          <!-- Video 6 -->
+          <div class="card video-projects side-video-card">
+            <div class="project">
+              <div class="video-wrapper project-card ratio-9-16" data-youtube-id="WAAVfNz74vg">
+                <img src="thumb5.jpg" class="thumb" alt="Test Edit V6 thumbnail" loading="lazy">
+                <div class="play-overlay">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="56" height="56" fill="white"
+                    aria-hidden="true">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+              </div>
+              <h4>Test Edit_V6</h4>
+              <p>Dynamic short-form content with smooth transitions and engaging pacing.</p>
+            </div>
+          </div>
+
+          <!-- Video 7 -->
+          <div class="card video-projects side-video-card">
+            <div class="project">
+              <div class="video-wrapper project-card ratio-9-16" data-youtube-id="87lllytp3ak">
+                <img src="thumb6.jpg" class="thumb" alt="Test Edit V7 thumbnail" loading="lazy">
+                <div class="play-overlay">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="56" height="56" fill="white"
+                    aria-hidden="true">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+              </div>
+              <h4>Test Edit_V7</h4>
+              <p>Professional reel showcasing clean editing and strong retention-focused techniques.</p>
+            </div>
+          </div>
 
           </div>
         </div>
@@ -351,7 +384,17 @@
       <div class="video-backdrop" id="videoPopup">
         <div class="video-container">
           <button type="button" class="modal-close" id="closePopup" aria-label="Close video modal">&times;</button>
-          <video id="popupVideo" controls></video>
+          <div class="iframe-wrap">
+            <iframe id="popupVideo"
+              width="560"
+              height="315"
+              src=""
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen></iframe>
+          </div>
         </div>
       </div>
 

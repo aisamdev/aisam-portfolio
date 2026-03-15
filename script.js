@@ -160,56 +160,44 @@ function initializeTheme() {
 }
 
 // ============================================
-// VIDEO POPUP FUNCTIONALITY
+// VIDEO POPUP FUNCTIONALITY (YouTube Embeds)
 // ============================================
 function initializeVideoPopup() {
   const popup = document.getElementById('videoPopup');
-  const popupVideo = document.getElementById('popupVideo');
+  const popupIframe = document.getElementById('popupVideo');
 
-  if (!popup || !popupVideo) return;
+  if (!popup || !popupIframe) return;
 
-  // Get all project elements
-  const projects = document.querySelectorAll('.project[data-video]');
+  // Target video wrappers that carry the YouTube ID
+  const videoWrappers = document.querySelectorAll('.video-wrapper[data-youtube-id]');
 
-  const isComingSoon = (project) => {
-    const hasComingSoonFlag = project.getAttribute('data-coming-soon') === 'true';
-    const videoSrc = project.getAttribute('data-video');
-    return hasComingSoonFlag || !videoSrc;
-  };
+  videoWrappers.forEach(wrapper => {
+    // Make the parent .project keyboard-accessible
+    const project = wrapper.closest('.project');
+    if (project) {
+      project.setAttribute('tabindex', '0');
+      project.setAttribute('role', 'button');
+      const title = project.querySelector('h4')?.textContent || 'video';
+      project.setAttribute('aria-label', `Play ${title}`);
 
-  projects.forEach(project => {
-    project.addEventListener('click', (e) => {
-      e.preventDefault();
-      if (isComingSoon(project)) {
-        alert('Coming soon.');
-        return;
-      }
-      const videoSrc = project.getAttribute('data-video');
-      openVideoPopup(videoSrc);
-    });
-
-    // Keyboard support for projects
-    project.setAttribute('tabindex', '0');
-    project.setAttribute('role', 'button');
-    project.setAttribute('aria-label', `Play ${project.querySelector('h4')?.textContent || 'video'}`);
-    if (isComingSoon(project)) {
-      project.setAttribute('aria-disabled', 'true');
+      project.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          const ytId = wrapper.getAttribute('data-youtube-id');
+          if (ytId) openVideoPopup(ytId);
+        }
+      });
     }
 
-    project.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        if (isComingSoon(project)) {
-          alert('Coming soon.');
-          return;
-        }
-        const videoSrc = project.getAttribute('data-video');
-        openVideoPopup(videoSrc);
-      }
+    // Click handler on the wrapper itself
+    wrapper.addEventListener('click', (e) => {
+      e.preventDefault();
+      const ytId = wrapper.getAttribute('data-youtube-id');
+      if (ytId) openVideoPopup(ytId);
     });
   });
 
-  // Close button handlers
+  // Close button
   const closeBtn = document.getElementById('closePopup');
   if (closeBtn) {
     closeBtn.addEventListener('click', closeVideoPopup);
@@ -230,39 +218,29 @@ function initializeVideoPopup() {
   });
 }
 
-function openVideoPopup(videoSrc) {
+function openVideoPopup(ytId) {
   const popup = document.getElementById('videoPopup');
-  const popupVideo = document.getElementById('popupVideo');
+  const popupIframe = document.getElementById('popupVideo');
 
-  if (!popup || !popupVideo) return;
+  if (!popup || !popupIframe) return;
 
   // Prevent body scroll
   document.body.classList.add('no-scroll');
 
-  // Set video source and show popup
-  popupVideo.src = videoSrc;
+  // Set YouTube embed URL with autoplay
+  popupIframe.src = `https://www.youtube.com/embed/${ytId}?autoplay=1`;
   popup.classList.add('active');
-
-  // Play video with slight delay for smooth animation
-  setTimeout(() => {
-    popupVideo.play().catch(err => {
-      console.log('Autoplay prevented:', err);
-    });
-  }, 100);
 }
 
 function closeVideoPopup() {
   const popup = document.getElementById('videoPopup');
-  const popupVideo = document.getElementById('popupVideo');
+  const popupIframe = document.getElementById('popupVideo');
 
-  if (!popup || !popupVideo) return;
+  if (!popup || !popupIframe) return;
 
-  // Remove active class
+  // Clear src first (stops YouTube playback), then hide
+  popupIframe.src = '';
   popup.classList.remove('active');
-
-  // Pause and clear video
-  popupVideo.pause();
-  popupVideo.src = '';
 
   // Re-enable body scroll
   document.body.classList.remove('no-scroll');
