@@ -221,26 +221,42 @@ function initializeVideoPopup() {
 function openVideoPopup(ytId) {
   const popup = document.getElementById('videoPopup');
   const popupIframe = document.getElementById('popupVideo');
+  const videoLoading = document.getElementById('videoLoading');
 
   if (!popup || !popupIframe) return;
 
   // Prevent body scroll
   document.body.classList.add('no-scroll');
 
-  // Set YouTube embed URL with autoplay
-  popupIframe.src = `https://www.youtube.com/embed/${ytId}?autoplay=1`;
+  // Show loading spinner
+  if (videoLoading) videoLoading.classList.remove('hidden');
+
+  // Set YouTube embed URL with autoplay and mute
+  popupIframe.src = `https://www.youtube.com/embed/${ytId}?autoplay=1&mute=1`;
+
+  // Hide spinner when iframe loads
+  popupIframe.onload = function() {
+    if (videoLoading) videoLoading.classList.add('hidden');
+  };
+
   popup.classList.add('active');
 }
 
 function closeVideoPopup() {
   const popup = document.getElementById('videoPopup');
   const popupIframe = document.getElementById('popupVideo');
+  const videoLoading = document.getElementById('videoLoading');
 
   if (!popup || !popupIframe) return;
 
-  // Clear src first (stops YouTube playback), then hide
-  popupIframe.src = '';
+  // Fade out first
   popup.classList.remove('active');
+
+  // Wait for fade-out animation to complete, then clear iframe src and reset spinner
+  setTimeout(() => {
+    popupIframe.src = '';
+    if (videoLoading) videoLoading.classList.remove('hidden');
+  }, 300); // Match CSS transition duration
 
   // Re-enable body scroll
   document.body.classList.remove('no-scroll');
